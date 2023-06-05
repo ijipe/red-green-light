@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import './views/HomeView.js';
+import './views/HomeView/HomeView.js';
 
 class RedGreenLight extends LitElement {
   static styles = css``;
