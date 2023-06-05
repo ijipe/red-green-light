@@ -3,7 +3,7 @@ import { fixture, expect } from '@open-wc/testing';
 
 import '../src/red-green-light.js';
 
-describe('RedGreenLight', () => {
+describe('RedGreenLight component', () => {
   let element;
   beforeEach(async () => {
     element = await fixture(html`<red-green-light></red-green-light>`);
@@ -17,8 +17,8 @@ describe('RedGreenLight', () => {
     expect(element).to.exist;
   });
 
-  it('should render the homeView component', () => {
-    const homeViewEl = element.shadowRoot.querySelector('home-view');
-    expect(homeViewEl).to.exist;
+  it('should render the router outlet', () => {
+    const outlet = element.shadowRoot.querySelector('#outlet');
+    expect(outlet).to.exist;
   });
 });

@@ -21,7 +21,7 @@ class GameView extends LitElement {
   render() {
     return html`
       <section>
-        <a href="/home">Back</a>
+        <a class="back-btn" href="/home">Back</a>
         <div class="view-title">${this.gameViewTitle}</div>
       </section>
     `;

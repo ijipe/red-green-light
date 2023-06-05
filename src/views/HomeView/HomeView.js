@@ -92,10 +92,11 @@ class HomeView extends LitElement {
   }
 
   sendPlayerName() {
-    // console.log(this.inputValue);
-    Router.go({
-      pathname: '/game',
-    });
+    if (this.inputValue) {
+      Router.go({
+        pathname: '/game',
+      });
+    }
   }
 }
 
