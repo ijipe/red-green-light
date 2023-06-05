@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import './views/HomeView/HomeView.js';
 
 class RedGreenLight extends LitElement {
   static styles = css``;
@@ -10,7 +11,7 @@ class RedGreenLight extends LitElement {
   }
 
   render() {
-    return html` <main>Red-green-light game</main> `;
+    return html` <main><home-view></home-view></main> `;
   }
 }
 
