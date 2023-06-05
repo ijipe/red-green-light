@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import '../../components/Input.js';
 
 class HomeView extends LitElement {
   static styles = css`
@@ -13,14 +14,14 @@ class HomeView extends LitElement {
       flex-direction: column;
       align-items: center;
       margin-top: 140px;
-      gap: 20px;
+      gap: 25px;
     }
 
-    img {
-      padding: 13px;
+    .computer-mouse-icon {
+      width: 55px;
+      height: 55px;
+      padding: 10px;
       background-color: #c888d4;
-      weight: 60px;
-      height: 60px;
       border-radius: 50%;
     }
 
@@ -33,6 +34,7 @@ class HomeView extends LitElement {
       background-color: #85c2f8;
       height: 55px;
       width: 85%;
+      margin-top: 15px;
       font-size: 20px;
       outline: none;
       border-style: none;
@@ -42,31 +44,54 @@ class HomeView extends LitElement {
     .join-btn:hover {
       background-color: #c888d4;
     }
+
+    input-component {
+      display: flex;
+      width: 85%;
+      margin-top: 10px;
+    }
   `;
 
   static properties = {
     homeViewTitle: { type: String },
     joinBtnText: { type: String },
+    labelTitle: { type: String },
+    inputValue: { type: String },
   };
 
   constructor() {
     super();
     this.homeViewTitle = 'Create new player';
     this.joinBtnText = 'JOIN';
+    this.labelTitle = 'Name* ';
+    this.inputValue = '';
   }
 
   render() {
     return html`
       <section>
         <img
+          class="computer-mouse-icon"
           src="../assets/computer-mouse-solid.svg"
           alt="computer-mouse icon"
         />
         <div class="view-title">${this.homeViewTitle}</div>
-
-        <button class="join-btn">${this.joinBtnText}</button>
+        <input-component
+          .labelText=${this.labelTitle}
+          @input-value=${this.getInputValue}
+        ></input-component>
+        <button class="join-btn" @click=${this.sendPlayerName}>
+          ${this.joinBtnText}
+        </button>
       </section>
     `;
+  }
+  getInputValue(e) {
+    this.inputValue = e.detail;
+  }
+
+  sendPlayerName() {
+    console.log(this.inputValue);
   }
 }
 
