@@ -1,19 +1,30 @@
-<p align="center">
-  <img width="200" src="https://open-wc.org/hero.png"></img>
-</p>
+## Red-Green-Light - BBVA
+
+This project is a challenge for BBVA. The objective of this challenge is to create a progressive web mobile app based on the game Red Light, Green Light. 
+Reference link with the general statement of the challenge: https://bbvaengineering.github.io/challenges/statues/
+
+The library used for its creation is Lit (https://lit.dev/) together with Open Web Components (https://open-wc.org/) using JavaScript.
 
 ## Open-wc Starter App
 
 [![Built with open-wc recommendations](https://img.shields.io/badge/built%20with-open--wc-blue.svg)](https://github.com/open-wc)
 
-## Quickstart
+## Creation
 
-To get started:
+Project generated with:
 
 ```bash
 npm init @open-wc
 # requires node 10 & npm 6 or higher
 ```
+## Starting the aplication
+
+Use the `npm start` or `npm run start` command to start the application.
+The application exposes a web service on port 8000.
+
+## Testing
+
+Run `npm test` or `npm run test` to execute the unit tests via open-wc/testing.
 
 ## Scripts
 
