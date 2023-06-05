@@ -7,7 +7,7 @@ import '../../src/views/HomeView/HomeView.js';
 describe('HomeView component', () => {
   let element;
   beforeEach(async () => {
-    element = await fixture(html`<home-view></home-view>>`);
+    element = await fixture(html`<home-view></home-view>`);
   });
 
   it('should pass the a11y audit', async () => {

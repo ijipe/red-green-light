@@ -68,7 +68,7 @@ class Input extends LitElement {
           placeholder=" "
           @change=${this.dispatchValue}
         />
-        <label for="input">${this.labelText}</label>
+        <label for="input" aria-label="Player name">${this.labelText}</label>
       </div>
     `;
   }
