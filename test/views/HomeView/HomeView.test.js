@@ -1,8 +1,9 @@
 import { html } from 'lit';
 import { fixture, expect } from '@open-wc/testing';
+import { Router } from '@vaadin/router';
 import sinon from 'sinon';
 
-import '../../src/views/HomeView/HomeView.js';
+import '../../../src/views/HomeView/HomeView.js';
 
 describe('HomeView component', () => {
   let element;
@@ -36,7 +37,7 @@ describe('HomeView component', () => {
     expect(element.inputValue).to.equal('Player');
   });
 
-  it('should call sendPlayerName function when join-btn is clicked', async () => {
+  it('should call sendPlayerName function when JOIN button is clicked', async () => {
     const joinBtn = element.shadowRoot.querySelector('.join-btn');
     const sendPlayerNameSpy = sinon.spy(element, 'sendPlayerName');
 
@@ -45,5 +46,20 @@ describe('HomeView component', () => {
 
     joinBtn.click();
     expect(sendPlayerNameSpy).to.have.been.called;
+  });
+
+  it('should redirect to gameView when clicking JOIN button and inputValue is not empty', async () => {
+    const joinBtn = element.shadowRoot.querySelector('.join-btn');
+    const routerGoSpy = sinon.spy(Router, 'go');
+
+    element.inputValue = 'Player';
+    element.requestUpdate();
+    await element.updateComplete;
+    joinBtn.click();
+
+    expect(routerGoSpy).to.have.been.calledOnceWithExactly({
+      pathname: '/game',
+    });
+    routerGoSpy.restore();
   });
 });

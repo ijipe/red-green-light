@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import { Router } from '@vaadin/router';
 import '../../components/Input.js';
 
 class HomeView extends LitElement {
@@ -18,8 +19,8 @@ class HomeView extends LitElement {
     }
 
     .computer-mouse-icon {
-      width: 55px;
-      height: 55px;
+      width: 50px;
+      height: 50px;
       padding: 10px;
       background-color: #c888d4;
       border-radius: 50%;
@@ -91,7 +92,11 @@ class HomeView extends LitElement {
   }
 
   sendPlayerName() {
-    console.log(this.inputValue);
+    if (this.inputValue) {
+      Router.go({
+        pathname: '/game',
+      });
+    }
   }
 }
 
