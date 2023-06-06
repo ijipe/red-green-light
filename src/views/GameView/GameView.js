@@ -100,6 +100,8 @@ class GameView extends LitElement {
   }
 
   firstUpdated() {
+    this.playerName = localStorage.getItem('currentPlayer');
+
     setTimeout(() => {
       this.isLightRed = false;
     }, 3000);
