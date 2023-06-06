@@ -48,6 +48,17 @@ describe('HomeView component', () => {
     expect(sendPlayerNameSpy).to.have.been.called;
   });
 
+  it('should save inputValue to localStorage when clicking JOIN button and inputValue is not empty', async () => {
+    const joinBtn = element.shadowRoot.querySelector('.join-btn');
+
+    element.inputValue = 'Player';
+    element.requestUpdate();
+    await element.updateComplete;
+    joinBtn.click();
+
+    expect(localStorage.getItem('currentPlayer')).to.equal('Player');
+  });
+
   it('should redirect to gameView when clicking JOIN button and inputValue is not empty', async () => {
     const joinBtn = element.shadowRoot.querySelector('.join-btn');
     const routerGoSpy = sinon.spy(Router, 'go');

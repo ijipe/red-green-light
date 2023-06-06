@@ -93,6 +93,8 @@ class HomeView extends LitElement {
 
   sendPlayerName() {
     if (this.inputValue) {
+      localStorage.setItem('currentPlayer', this.inputValue);
+
       Router.go({
         pathname: '/game',
       });
