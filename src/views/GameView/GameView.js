@@ -80,20 +80,20 @@ class GameView extends LitElement {
   `;
 
   static properties = {
-    gameViewTitle: { type: String },
     playerName: { type: String },
     highScore: { type: Number },
-    score: { type: Number },
+    currentScore: { type: Number },
     isLightRed: { type: Boolean },
+    previousBtnSelected: { type: String },
   };
 
   constructor() {
     super();
-    this.gameViewTitle = 'Game view';
     this.playerName = 'Player';
     this.highScore = 0;
-    this.score = 0;
+    this.currentScore = 0;
     this.isLightRed = true;
+    this.previousBtnSelected = '';
   }
 
   render() {
@@ -124,9 +124,9 @@ class GameView extends LitElement {
                   alt="green-light icon"
                 />`}
           </div>
-          <div class="score">Score: ${this.score}</div>
+          <div class="score">Score: ${this.currentScore}</div>
           <div class="walking-buttons">
-            <button id="left-btn">
+            <button id="left-btn" @click=${this.play}>
               <img
                 class="shoe-prints-icon"
                 src="./assets/shoe-prints-solid.svg"
@@ -134,7 +134,7 @@ class GameView extends LitElement {
               />
               <span>LEFT</span>
             </button>
-            <button id="right-btn">
+            <button id="right-btn" @click=${this.play}>
               <img
                 class="shoe-prints-icon"
                 src="./assets/shoe-prints-solid.svg"
@@ -146,6 +146,27 @@ class GameView extends LitElement {
         </div>
       </section>
     `;
+  }
+
+  play(e) {
+    const currentBtnSelected = e.currentTarget.id;
+
+    if (
+      currentBtnSelected === this.previousBtnSelected &&
+      this.currentScore > 0
+    ) {
+      this.currentScore--;
+    }
+
+    if (currentBtnSelected !== this.previousBtnSelected) {
+      this.currentScore++;
+    }
+
+    this.previousBtnSelected = currentBtnSelected;
+
+    if (this.currentScore > this.highScore) {
+      this.highScore = this.currentScore;
+    }
   }
 }
 
