@@ -87,20 +87,23 @@ class GameView extends LitElement {
     isLightRed: { type: Boolean },
     previousBtnSelected: { type: String },
     isPlaying: { type: Boolean },
+    playerData: { type: Array },
   };
 
   constructor() {
     super();
-    this.playerName = 'Player';
+    this.playerName = '';
     this.highScore = 0;
     this.currentScore = 0;
     this.isLightRed = true;
     this.previousBtnSelected = '';
     this.isPlaying = true;
+    this.playerData = [];
   }
 
   firstUpdated() {
-    this.playerName = localStorage.getItem('currentPlayer');
+    this.getPlayersFromLocalStorage();
+    this.initializeCurrentPlayer();
 
     setTimeout(() => {
       this.isLightRed = false;
@@ -199,10 +202,54 @@ class GameView extends LitElement {
     } else {
       this.currentScore = 0;
     }
+
+    this.updateCurrentPlayer();
+    this.savePlayersToLocalStorage();
   }
 
   stopPlaying() {
     this.isPlaying = false;
+  }
+
+  initializeCurrentPlayer() {
+    this.playerName = localStorage.getItem('currentPlayer');
+
+    const currentPlayer = this.playerData.find(
+      player => player.name === this.playerName
+    );
+
+    if (currentPlayer) {
+      this.highScore = currentPlayer.maxScore;
+      this.currentScore = currentPlayer.score;
+    }
+  }
+
+  updateCurrentPlayer() {
+    const currentPlayer = this.playerData.find(
+      player => player.name === this.playerName
+    );
+
+    if (currentPlayer) {
+      currentPlayer.maxScore = this.highScore;
+      currentPlayer.score = this.currentScore;
+    } else {
+      const newPlayer = {
+        name: this.playerName,
+        maxScore: this.highScore,
+        score: this.currentScore,
+      };
+      this.playerData.push(newPlayer);
+    }
+  }
+
+  savePlayersToLocalStorage() {
+    localStorage.setItem('playerData', JSON.stringify(this.playerData));
+  }
+
+  getPlayersFromLocalStorage() {
+    if (localStorage.getItem('playerData')) {
+      this.playerData = JSON.parse(localStorage.getItem('playerData'));
+    }
   }
 }
 
