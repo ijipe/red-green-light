@@ -15,6 +15,7 @@ class GameView extends LitElement {
       padding: 20px 20px;
       background-color: #222;
       font-size: 25px;
+      color: white;
     }
 
     .back-icon {
@@ -125,7 +126,7 @@ class GameView extends LitElement {
     return html`
       <section>
         <header>
-          <div>Hi ${this.playerName}</div>
+          <div class="player-name">Hi ${this.playerName}</div>
           <a class="back-btn" href="/home" @click=${this.stopPlaying}>
             <img
               class="back-icon"
