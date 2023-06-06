@@ -85,6 +85,7 @@ class GameView extends LitElement {
     currentScore: { type: Number },
     isLightRed: { type: Boolean },
     previousBtnSelected: { type: String },
+    isPlaying: { type: Boolean },
   };
 
   constructor() {
@@ -94,6 +95,30 @@ class GameView extends LitElement {
     this.currentScore = 0;
     this.isLightRed = true;
     this.previousBtnSelected = '';
+    this.isPlaying = true;
+  }
+
+  firstUpdated() {
+    setTimeout(() => {
+      this.isLightRed = false;
+    }, 3000);
+  }
+
+  updated(changedProperties) {
+    const greenLightTime =
+      Math.max(10000 - this.currentScore * 100, 2000) +
+      Math.random(-1500, 1500);
+    if (changedProperties.has('isLightRed') && this.isPlaying) {
+      if (!this.isLightRed) {
+        setTimeout(() => {
+          this.isLightRed = true;
+        }, greenLightTime);
+      } else {
+        setTimeout(() => {
+          this.isLightRed = false;
+        }, 3000);
+      }
+    }
   }
 
   render() {
@@ -101,7 +126,7 @@ class GameView extends LitElement {
       <section>
         <header>
           <div>Hi ${this.playerName}</div>
-          <a class="back-btn" href="/home">
+          <a class="back-btn" href="/home" @click=${this.stopPlaying}>
             <img
               class="back-icon"
               src="./assets/arrow-right.svg"
@@ -151,22 +176,30 @@ class GameView extends LitElement {
   play(e) {
     const currentBtnSelected = e.currentTarget.id;
 
-    if (
-      currentBtnSelected === this.previousBtnSelected &&
-      this.currentScore > 0
-    ) {
-      this.currentScore--;
-    }
+    if (!this.isLightRed) {
+      if (
+        currentBtnSelected === this.previousBtnSelected &&
+        this.currentScore > 0
+      ) {
+        this.currentScore--;
+      }
 
-    if (currentBtnSelected !== this.previousBtnSelected) {
-      this.currentScore++;
-    }
+      if (currentBtnSelected !== this.previousBtnSelected) {
+        this.currentScore++;
+      }
 
-    this.previousBtnSelected = currentBtnSelected;
+      this.previousBtnSelected = currentBtnSelected;
 
-    if (this.currentScore > this.highScore) {
-      this.highScore = this.currentScore;
+      if (this.currentScore > this.highScore) {
+        this.highScore = this.currentScore;
+      }
+    } else {
+      this.currentScore = 0;
     }
+  }
+
+  stopPlaying() {
+    this.isPlaying = false;
   }
 }
 
