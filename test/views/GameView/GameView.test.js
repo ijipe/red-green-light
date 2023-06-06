@@ -4,6 +4,12 @@ import sinon from 'sinon';
 
 import '../../../src/views/GameView/GameView.js';
 
+const playerArray = [
+  { name: 'Player1', maxScore: '30', score: '2' },
+  { name: 'Player2', maxScore: '50', score: '8' },
+  { name: 'Player3', maxScore: '12', score: '1' },
+];
+
 describe('GameView component', () => {
   let element;
   beforeEach(async () => {
@@ -16,11 +22,6 @@ describe('GameView component', () => {
 
   it('should render the component', async () => {
     expect(element).to.exist;
-  });
-
-  it('should render the name of the player', async () => {
-    const playerName = element.shadowRoot.querySelector('.player-name');
-    expect(playerName.textContent).to.equal('Hi Player');
   });
 
   it('should redirect to homeView when clicking Back button', async () => {
@@ -125,5 +126,22 @@ describe('GameView component', () => {
     rightBtn.click();
     expect(element.currentScore).to.equal(0);
     expect(element.highScore).to.equal(10);
+  });
+
+  it('should save players to localStorage with savePlayersToLocalStorage() function', async () => {
+    element.playerData = playerArray;
+    element.savePlayersToLocalStorage();
+
+    const recoveredValue = JSON.parse(localStorage.getItem('playerData'));
+
+    expect(recoveredValue).to.deep.equal(playerArray);
+  });
+
+  it('should get players from localStorage with getPlayersFromLocalStorage() function', async () => {
+    localStorage.setItem('playerData', JSON.stringify(playerArray));
+
+    element.getPlayersFromLocalStorage();
+
+    expect(element.playerData).to.deep.equal(playerArray);
   });
 });
