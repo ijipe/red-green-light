@@ -1,3 +1,5 @@
+![red-green-light](https://github.com/ijipe/red-green-light/assets/116267461/e2c71a65-6fda-4278-a0a7-c9c168abb20a)
+
 ## 🚦 Red-Green-Light 🚦 - BBVA
 
 This project is a challenge for BBVA. The objective of this challenge is to create a progressive web mobile app based on the game Red Light, Green Light. 
