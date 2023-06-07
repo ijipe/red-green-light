@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@vaadin/router": "^1.7.5",
+    "esbuild": "^0.17.19",
     "lit": "^2.0.2"
   },
   "devDependencies": {
@@ -43,6 +44,7 @@
     "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.60.0",
+    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-esbuild": "^5.0.0",
     "rollup-plugin-workbox": "^6.2.0",
     "sinon": "^15.1.0"
