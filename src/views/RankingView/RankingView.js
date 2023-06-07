@@ -1,5 +1,4 @@
 import { LitElement, html, css } from 'lit';
-import { Router } from '@vaadin/router';
 import '../../components/Input.js';
 
 class RankingView extends LitElement {
@@ -16,7 +15,7 @@ class RankingView extends LitElement {
       align-items: center;
       padding: 20px 20px;
       background-color: #222;
-      font-size: 25px;
+      font-size: 30px;
       color: white;
     }
 
@@ -35,15 +34,82 @@ class RankingView extends LitElement {
       font-size: 30px;
       margin-top: 80px;
     }
+
+    .ranking-list {
+      list-style: none;
+      width: 60%;
+      margin: 30px 0;
+    }
+
+    .ranking-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 25px;
+      align-items: center;
+      margin-bottom: 25px;
+      padding: 2px 10px;
+    }
+
+    .ranking-item:hover {
+      background-color: #5f6468;
+      padding: 2px 10px;
+      cursor: pointer;
+      border-radius: 0.8rem;
+    }
+
+    .first-col {
+      display: flex;
+      align-items: center;
+    }
+
+    .star-icon {
+      width: 40px;
+      height: 40px;
+      padding: 8px;
+      background-color: #c888d4;
+      border-radius: 50%;
+      margin-right: 20px;
+    }
   `;
 
   static properties = {
     rankingViewTitle: { type: String },
+    playerArray: { type: Array },
+    colorsArray: { type: Array },
   };
 
   constructor() {
     super();
     this.rankingViewTitle = 'Ranking';
+    this.playerArray = [];
+    this.colorsArray = [
+      {
+        position: 1,
+        backgroundColor: '#efb810',
+      },
+      {
+        position: 2,
+        backgroundColor: '#BEBEBE',
+      },
+      {
+        position: 3,
+        backgroundColor: '#CD7F32',
+      },
+      {
+        position: 4,
+        backgroundColor: '#800015',
+      },
+      {
+        position: 5,
+        backgroundColor: '#800080',
+      },
+    ];
+  }
+
+  firstUpdated() {
+    this.getPlayersFromLocalStorage();
+    this.sortPlayerArray();
+    this.addColorsToPlayers(this.playerArray, this.colorsArray);
   }
 
   render() {
@@ -58,9 +124,50 @@ class RankingView extends LitElement {
             />
           </a>
         </header>
-        <div class="main-container">${this.rankingViewTitle}</div>
+        <div class="main-container">
+          <span class="ranking-title">${this.rankingViewTitle}</span>
+          <ul class="ranking-list">
+            ${this.playerArray.map(
+              item => html`
+                <li class="ranking-item">
+                  <div class="first-col">
+                    <img
+                      class="star-icon"
+                      src="./assets/star-solid.svg"
+                      alt="star icon"
+                      style="background-color: ${item.backgroundColor};"
+                    />
+                    <span>${item.name}</span>
+                  </div>
+                  <div class="second-col">
+                    <span>${item.maxScore}</span>
+                  </div>
+                </li>
+              `
+            )}
+          </ul>
+        </div>
       </section>
     `;
+  }
+
+  getPlayersFromLocalStorage() {
+    if (localStorage.getItem('playerData')) {
+      this.playerArray = JSON.parse(localStorage.getItem('playerData'));
+    }
+  }
+
+  sortPlayerArray() {
+    this.playerArray.sort((a, b) => b.maxScore - a.maxScore);
+  }
+
+  addColorsToPlayers(players, colors) {
+    players.forEach((player, index) => {
+      const color = colors.find(color => color.position === index + 1) || {
+        backgroundColor: '#000',
+      };
+      player.backgroundColor = color.backgroundColor;
+    });
   }
 }
 
