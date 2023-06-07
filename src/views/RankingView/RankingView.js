@@ -108,7 +108,7 @@ class RankingView extends LitElement {
 
   firstUpdated() {
     this.getPlayersFromLocalStorage();
-    this.sortPlayerArray();
+    this.sortPlayersByMaxScore();
     this.addColorsToPlayers(this.playerArray, this.colorsArray);
   }
 
@@ -157,7 +157,7 @@ class RankingView extends LitElement {
     }
   }
 
-  sortPlayerArray() {
+  sortPlayersByMaxScore() {
     this.playerArray.sort((a, b) => b.maxScore - a.maxScore);
   }
 

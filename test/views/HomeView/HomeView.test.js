@@ -73,4 +73,10 @@ describe('HomeView component', () => {
     });
     routerGoSpy.restore();
   });
+
+  it('should redirect to rankingView when clicking Ranking button', async () => {
+    const rankingBtn = element.shadowRoot.querySelector('.ranking-btn');
+
+    expect(rankingBtn.href).to.equal('http://localhost:8000/ranking');
+  });
 });
