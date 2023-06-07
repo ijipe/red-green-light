@@ -10,11 +10,11 @@ class HomeView extends LitElement {
       padding: 0;
     }
 
-    section {
+    .main-container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: 140px;
+      margin-top: 80px;
       gap: 25px;
     }
 
@@ -51,6 +51,30 @@ class HomeView extends LitElement {
       width: 85%;
       margin-top: 10px;
     }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .ranking-btn {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 20px;
+      background-color: #000000;
+      font-size: 15px;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .ranking-icon {
+      width: 40px;
+      height: 40px;
+    }
   `;
 
   static properties = {
@@ -71,19 +95,31 @@ class HomeView extends LitElement {
   render() {
     return html`
       <section>
-        <img
-          class="computer-mouse-icon"
-          src="../assets/computer-mouse-solid.svg"
-          alt="computer-mouse icon"
-        />
-        <div class="view-title">${this.homeViewTitle}</div>
-        <input-component
-          .labelText=${this.labelTitle}
-          @input-value=${this.getInputValue}
-        ></input-component>
-        <button class="join-btn" @click=${this.sendPlayerName}>
-          ${this.joinBtnText}
-        </button>
+        <header>
+          <a class="ranking-btn" href="/ranking">
+            <img
+              class="ranking-icon"
+              src="./assets/ranking-star-solid.svg"
+              alt="ranking icon"
+            />
+            <span class="ranking-title">RANKING</span>
+          </a>
+        </header>
+        <div class="main-container">
+          <img
+            class="computer-mouse-icon"
+            src="../assets/computer-mouse-solid.svg"
+            alt="computer-mouse icon"
+          />
+          <div class="view-title">${this.homeViewTitle}</div>
+          <input-component
+            .labelText=${this.labelTitle}
+            @input-value=${this.getInputValue}
+          ></input-component>
+          <button class="join-btn" @click=${this.sendPlayerName}>
+            ${this.joinBtnText}
+          </button>
+        </div>
       </section>
     `;
   }

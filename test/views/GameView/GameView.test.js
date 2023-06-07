@@ -5,9 +5,9 @@ import sinon from 'sinon';
 import '../../../src/views/GameView/GameView.js';
 
 const playerArray = [
-  { name: 'Player1', maxScore: '30', score: '2' },
-  { name: 'Player2', maxScore: '50', score: '8' },
-  { name: 'Player3', maxScore: '12', score: '1' },
+  { name: 'Player1', maxScore: 30, score: 2 },
+  { name: 'Player2', maxScore: 50, score: 8 },
+  { name: 'Player3', maxScore: 12, score: 1 },
 ];
 
 describe('GameView component', () => {
