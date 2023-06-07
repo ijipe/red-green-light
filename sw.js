@@ -9,6 +9,7 @@ const appShellFiles = [
   './assets/icon/icon168.png',
   './assets/icon/icon192.png',
   './assets/icon/icon512.png',
+  './assets/icon/favicon.ico',
   './assets/arrow-right.svg',
   './assets/computer-mouse-solid.svg',
   './assets/shoe-prints-solid.svg',
