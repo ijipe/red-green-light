@@ -55,6 +55,12 @@ Run `npm test` or `npm run test` to execute the unit tests via open-wc/testing.
 - `lint` runs the linter for your project
 - `format` fixes linting and formatting errors
 
+## Compatibility 🤝
+The app is compatible with most modern desktop and mobile web browsers like Chrome, Firefox, Edge and Safari.
+
+The app uses the vibration feature for certain interactions.
+Note: Vibrate is not currently supported in Apple's Safari browser on desktop nor Safari on iOS.
+
 ## Authors 👥
 
 Created by Irene Jiménez Pérez.
