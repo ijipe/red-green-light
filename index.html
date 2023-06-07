@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="Description" content="Put your description here.">
+  <meta name="RG Light" content="Red Light, Green Light Minigame">
+  <link rel="manifest" href="manifest.webmanifest">
   <base href="/">
 
   <style>
@@ -13,7 +14,8 @@
       margin: 0;
       padding: 0;
       font-family: sans-serif;
-      background-color: #ededed;
+      color: white;
+      background-color: #000000;
     }
   </style>
   <title>red-green-light</title>
@@ -21,6 +23,14 @@
 
 <body>
   <red-green-light></red-green-light>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register("sw.js");
+      });
+    }
+  </script>
 
   <script type="module" src="./src/red-green-light.js"></script>
 </body>
