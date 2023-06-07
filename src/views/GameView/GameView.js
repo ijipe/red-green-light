@@ -188,6 +188,7 @@ class GameView extends LitElement {
         this.currentScore > 0
       ) {
         this.currentScore--;
+        navigator.vibrate(200);
       }
 
       if (currentBtnSelected !== this.previousBtnSelected) {
@@ -201,6 +202,7 @@ class GameView extends LitElement {
       }
     } else {
       this.currentScore = 0;
+      navigator.vibrate(800);
     }
 
     this.updateCurrentPlayer();
