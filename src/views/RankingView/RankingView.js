@@ -168,7 +168,7 @@ class RankingView extends LitElement {
       };
       player.backgroundColor = color.backgroundColor;
     });
-  }
+  } 
 }
 
 customElements.define('ranking-view', RankingView);
