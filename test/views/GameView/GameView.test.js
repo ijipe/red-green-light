@@ -144,4 +144,33 @@ describe('GameView component', () => {
 
     expect(element.playerData).to.deep.equal(playerArray);
   });
+
+  it('should vibrate when a point is lost', async () => {
+    const leftButton = element.shadowRoot.querySelector('#left-btn');
+    const vibrateSpy = sinon.spy(navigator, 'vibrate');
+
+    element.isLightRed = false;
+    element.currentScore = 2;
+    element.requestUpdate();
+    await element.updateComplete;
+
+    leftButton.click();
+    leftButton.click();
+
+    expect(vibrateSpy.calledWith(200)).to.be.true;
+    vibrateSpy.restore();
+  });
+
+  it('should vibrate when all points are lost', async () => {
+    const leftButton = element.shadowRoot.querySelector('#left-btn');
+    const vibrateSpy = sinon.spy(navigator, 'vibrate');
+
+    element.isLightRed = true;
+    element.currentScore = 2;
+    await element.updateComplete;
+
+    leftButton.click();
+
+    expect(vibrateSpy.calledWith(800)).to.be.true;
+  });
 });
