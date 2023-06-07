@@ -39,6 +39,14 @@ class RedGreenLight extends LitElement {
         },
       },
       {
+        name: 'ranking',
+        path: '/ranking',
+        component: 'ranking-view',
+        action: async () => {
+          await import('./views/RankingView/RankingView.js');
+        },
+      },
+      {
         path: '(.*)',
         redirect: '/home',
       },

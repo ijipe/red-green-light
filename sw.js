@@ -15,10 +15,13 @@ const appShellFiles = [
   './assets/shoe-prints-solid.svg',
   './assets/traffic-light-solid-green.svg',
   './assets/traffic-light-solid-red.svg',
+  './assets/star-solid.svg',
+  './assets/ranking-star-solid.svg',
   './src/red-green-light.js',
   './src/components/Input.js',
   './src/views/GameView/GameView.js',
   './src/views/HomeView/HomeView.js',
+  './src/views/RankingView/RankingView.js',
 ];
 
 self.addEventListener('install', e => {
