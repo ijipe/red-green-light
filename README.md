@@ -15,6 +15,8 @@ The player will enter his name on the main screen (home view) to access the game
 On the next screen (game view), the player must simulate walking by pressing the left-right buttons alternately to add one point each time. If the player presses the same button consecutively, one point will be deducted. The player will only be able to walk while the traffic light is green, if the traffic light changes to red and he presses any button, he will automatically lose all points.
 The objective of the game is to get the maximum number of points possible.
 
+When losing points the device will vibrate and an error audio will sound. In addition, while the traffic light is green, an audio will play, faster and faster depending on the points the player has.
+
 [Reference link with the general statement of the challenge.](https://bbvaengineering.github.io/challenges/statues/)
 
 ## Technology used 💻
@@ -60,8 +62,10 @@ Run `npm test` or `npm run test` to execute the unit tests via open-wc/testing.
 ## Compatibility 🤝
 The app is compatible with most modern desktop and mobile web browsers like Chrome, Firefox, Edge and Safari.
 
-The app uses the vibration feature for certain interactions.
-Note: Vibrate is not currently supported in Apple's Safari browser on desktop nor Safari on iOS.
+The app uses the audio feature for certain interactions compatible with all browsers.
+
+In addition, the app uses the vibration feature for certain interactions.
+Note: Vibrate is not currently supported in Apple's Safari browser on desktop nor Safari on iOS, nor in computers.
 
 ## Authors 👥
 
