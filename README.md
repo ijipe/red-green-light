@@ -1,4 +1,4 @@
-![red-green-light](https://github.com/ijipe/red-green-light/assets/116267461/e2c71a65-6fda-4278-a0a7-c9c168abb20a)
+![red-green-light](https://github.com/ijipe/red-green-light/assets/116267461/ddcf5dc4-a9fc-456d-ad1e-14158736e25c)
 
 ## 🚦 Red-Green-Light 🚦 - BBVA
 
