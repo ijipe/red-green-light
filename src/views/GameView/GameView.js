@@ -88,6 +88,9 @@ class GameView extends LitElement {
     previousBtnSelected: { type: String },
     isPlaying: { type: Boolean },
     playerData: { type: Array },
+    song: { type: Object },
+    errorSound: { type: Object },
+    timeoutReference: { type: Object },
   };
 
   constructor() {
@@ -99,6 +102,9 @@ class GameView extends LitElement {
     this.previousBtnSelected = '';
     this.isPlaying = true;
     this.playerData = [];
+    this.song = new Audio('./assets/audio/song.mp3');
+    this.errorSound = new Audio('./assets/audio/errorSound.mp3');
+    this.timeoutReference = {};
   }
 
   firstUpdated() {
@@ -114,14 +120,20 @@ class GameView extends LitElement {
     const greenLightTime =
       Math.max(10000 - this.currentScore * 100, 2000) +
       Math.random(-1500, 1500);
+
     if (changedProperties.has('isLightRed') && this.isPlaying) {
       if (!this.isLightRed) {
         setTimeout(() => {
           this.isLightRed = true;
+          this.pauseAudio(this.song);
         }, greenLightTime);
       } else {
-        setTimeout(() => {
+        this.timeoutReference = setTimeout(() => {
+          // speed is increased 1% each point, starting at 0.8
+          const songSpeed = 0.8 * (1 + this.currentScore / 100);
+
           this.isLightRed = false;
+          this.playAudio(this.song, 0.2, songSpeed);
         }, 3000);
       }
     }
@@ -202,6 +214,7 @@ class GameView extends LitElement {
       }
     } else {
       this.currentScore = 0;
+      this.playAudio(this.errorSound, 0.8, 1.5);
       navigator.vibrate(800);
     }
 
@@ -211,6 +224,8 @@ class GameView extends LitElement {
 
   stopPlaying() {
     this.isPlaying = false;
+    this.pauseAudio(this.song);
+    clearTimeout(this.timeoutReference);
   }
 
   initializeCurrentPlayer() {
@@ -252,6 +267,16 @@ class GameView extends LitElement {
     if (localStorage.getItem('playerData')) {
       this.playerData = JSON.parse(localStorage.getItem('playerData'));
     }
+  }
+
+  playAudio(audio, volume, speed) {
+    audio.volume = volume;
+    audio.playbackRate = speed;
+    audio.play();
+  }
+
+  pauseAudio(audio) {
+    audio.pause();
   }
 }
 
