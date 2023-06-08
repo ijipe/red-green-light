@@ -173,4 +173,23 @@ describe('GameView component', () => {
 
     expect(vibrateSpy.calledWith(800)).to.be.true;
   });
+
+  it('should play the audio with the playAudio() function', async () => {
+    const audioEl = new Audio('../../../assets/audios/song.mp3');
+    const playSpy = sinon.spy(audioEl, 'play');
+
+    const volume = 0.5;
+    const speed = 1;
+
+    element.playAudio(audioEl, volume, speed);
+    expect(playSpy).to.have.been.called;
+  });
+
+  it('should pause the audio with the pauseAudio() function', async () => {
+    const audioEl = new Audio('../../../assets/audios/song.mp3');
+    const pauseSpy = sinon.spy(audioEl, 'pause');
+
+    element.pauseAudio(audioEl);
+    expect(pauseSpy).to.have.been.called;
+  });
 });
